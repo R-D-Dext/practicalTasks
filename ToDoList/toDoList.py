@@ -5,7 +5,17 @@ from datetime import datetime
 TODO_FILE = "todo_list.json"
 
 def load_tasks():
-    pass
+    """Загрузить задачи из файла JSON"""
+    if not os.path.exists(TODO_FILE):
+        #Если нет файла то возвращаем пустой массив
+        return []
+    
+    try:
+        with open(TODO_FILE, 'r', encoding='utf-8') as file:
+            tasks = json.load(file)
+            return tasks
+    except(json.JSONDecodeError, FileNotFoundError):
+        return [] 
 
 def show_task(tasks):
     """Показать все задачи с номерами"""
